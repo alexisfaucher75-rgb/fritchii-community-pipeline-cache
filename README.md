@@ -5,15 +5,17 @@ in a separate repository.
 
 ## Current status
 
-This repository currently contains documentation and the Fritchii manifest schema only. **It does
-not yet contain a usable shader/pipeline pack, accept uploads, or provide a production download
-endpoint.** The Ocarina of Time records from Lichii Shader Sync were inspected but are not included:
-the upstream repository has no declared license, and its manifest does not identify the game update
-needed to establish compatibility.
+This repository contains documentation, the Fritchii manifest schema, and a tiny synthetic fixture
+for exercising the client's import path. **It does not contain an OoT pack, accept uploads, or
+provide a production download endpoint.** The Ocarina of Time records from Lichii Shader Sync were
+inspected but are not included: the upstream repository has no declared license, and its manifest
+does not identify the game update needed to establish compatibility.
 
-Do not configure this repository as Fritchii's community source yet. The shipped client expects a
-version-3 Fritchii snapshot manifest at a specific endpoint layout; publishing the files here does
-not by itself make that endpoint available or compatible.
+Do not configure this repository as Fritchii's community source for a game. The checked-in fixture
+uses the deliberately fake title `FFFFFFFFFFFFCACE`, contains one synthetic compute record, and is
+only for the developer import probe. It does not establish OoT compatibility or test Vulkan pipeline
+creation. Production packs need reviewed game edition/update metadata, record provenance, rights,
+publisher authentication, moderation, and a release process.
 
 ## Format and scope
 
@@ -27,13 +29,18 @@ translator ABIs must be rejected or migrated explicitly.
 
 ## Repository contents
 
-## Contents
-
 - `schema/manifest-v3.schema.json`: the proposed snapshot manifest schema.
 - `POLICY.md`: draft contribution, provenance, and privacy requirements.
 - `RELEASE-POLICY.md`: draft release, integrity, signatures, and rollback plan.
 - `UPSTREAM-COMPATIBILITY.md`: observed upstream format and unresolved import gates.
-- `fixtures/README.md`: synthetic-only fixture policy.
+- `fixtures/client-import/`: synthetic snapshot exposed at the direct raw-content route expected by
+  the client.
+- `fixtures/client-import-negative-hash/`: the same synthetic content with an intentionally wrong
+  declared SHA-256, for testing rejection and preservation of an existing cache.
+- `tools/`: deterministic fixture generation and validation; these scripts are GPL-3.0-or-later as
+  marked in their file headers. This does not license any pipeline records.
+- `.github/workflows/validate.yml`: CI validation of the schema identity, fixture fields, sizes,
+  hashes, gzip stream, deterministic generation, and record structure.
 
 ## Contributions and licensing
 
@@ -44,4 +51,6 @@ documented. The contribution and release policies are drafts, not an operational
 
 The project needs an explicit data license, compatibility attestation, signed release process,
 moderation/removal rules, and automated validation before accepting or distributing real records.
+The synthetic fixture's versioned raw-content base URL is documented in `fixtures/README.md`; it is
+for tests only and is not an approved source for game data.
 

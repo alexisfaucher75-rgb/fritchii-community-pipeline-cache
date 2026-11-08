@@ -1,0 +1,27 @@
+{
+  "chunks": [
+    {
+      "compressed_size": 52,
+      "entries": 1,
+      "expanded_size": 120,
+      "file": "chunk-00000-deb2583fe8d13ede.bin.gz",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "tag": "chunks/FFFFFFFFFFFFCACE/update-0"
+    }
+  ],
+  "compression": "gzip",
+  "game": {
+    "edition_id": "FFFFFFFFFFFFCACE",
+    "title_id": "FFFFFFFFFFFFCACE",
+    "update_version": 0
+  },
+  "kind": "snapshot",
+  "manifest_format": 3,
+  "producer": {
+    "emulator_version": "synthetic-fixture-0.2.0",
+    "translator_abi": 1
+  },
+  "record_format": 1,
+  "source_cache_version": 52,
+  "total_entries": 1
+}

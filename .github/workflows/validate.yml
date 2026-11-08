@@ -1,0 +1,23 @@
+name: Validate synthetic library
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate manifest schema and fixture payloads
+        run: python tools/validate_library.py --root .
+      - name: Run malformed-fixture tests
+        run: python -m unittest discover -s tests -v
+      - name: Verify deterministic fixture generation
+        run: python tools/generate_synthetic_fixture.py --check-against fixtures

@@ -14,5 +14,7 @@ user/
 shader/
 driver-cache/
 community-cache/
+__pycache__/
+*.py[cod]
 *.tmp
 *.bak

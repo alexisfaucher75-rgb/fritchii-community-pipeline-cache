@@ -1,5 +1,5 @@
-Fritchii Community Pipeline Library Prototype 0.1.0
+Fritchii Community Pipeline Library Prototype 0.2.0
 Prepared: 2026-11-09
-Status: public repository scaffold; no production endpoint, uploader, or real pipeline packs
-Contents: manifest v3 schema, governance drafts, legacy compatibility notes, synthetic-only fixture policy
+Status: public test prototype; no production endpoint, uploader, or real game pipeline packs
+Contents: manifest v3 schema, governance drafts, legacy compatibility notes, deterministic synthetic client-import fixture and validator
 Third-party pipeline data: none; redistribution rights remain unconfirmed
