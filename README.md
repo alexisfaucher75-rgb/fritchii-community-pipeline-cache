@@ -54,3 +54,17 @@ moderation/removal rules, and automated validation before accepting or distribut
 The synthetic fixture's versioned raw-content base URL is documented in `fixtures/README.md`; it is
 for tests only and is not an approved source for game data.
 
+## Reproduce the synthetic checks
+
+From a clean checkout, run:
+
+```sh
+python tools/validate_library.py --root .
+python -m unittest discover -s tests -v
+python tools/generate_synthetic_fixture.py --check-against fixtures
+```
+
+These checks validate the checked-in fixture and its direct endpoint layout. The separate Fritchii
+source-tree probe exercises the C++ downloader against the pinned valid and negative-hash URLs in
+`fixtures/README.md`; it is an opt-in developer test and does not require a game or Vulkan device.
+
