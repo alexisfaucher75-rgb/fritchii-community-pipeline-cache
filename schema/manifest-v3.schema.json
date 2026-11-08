@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fritchii community pipeline manifest v3",
+  "type": "object",
+  "required": [
+    "manifest_format",
+    "record_format",
+    "compression",
+    "kind",
+    "game",
+    "producer",
+    "source_cache_version",
+    "total_entries",
+    "chunks"
+  ],
+  "properties": {
+    "manifest_format": { "const": 3 },
+    "record_format": { "const": 1 },
+    "compression": { "const": "gzip" },
+    "kind": { "const": "snapshot" },
+    "game": {
+      "type": "object",
+      "required": ["title_id", "edition_id", "update_version"],
+      "properties": {
+        "title_id": { "type": "string", "pattern": "^[0-9A-F]{16}$" },
+        "edition_id": { "type": "string", "pattern": "^[0-9A-F]{16}$" },
+        "update_version": { "type": "integer", "minimum": 0, "maximum": 4294967295 }
+      },
+      "additionalProperties": false
+    },
+    "producer": {
+      "type": "object",
+      "required": ["emulator_version", "translator_abi"],
+      "properties": {
+        "emulator_version": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "translator_abi": { "const": 1 }
+      },
+      "additionalProperties": false
+    },
+    "source_cache_version": { "enum": [52, 53, 54] },
+    "total_entries": { "type": "integer", "minimum": 1, "maximum": 1000000 },
+    "chunks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8192,
+      "items": {
+        "type": "object",
+        "required": ["tag", "file", "compressed_size", "expanded_size", "sha256", "entries"],
+        "properties": {
+          "tag": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+(?:/[A-Za-z0-9._-]+)*$",
+            "not": { "pattern": "(^|/)(?:\\.|\\.\\.)(/|$)" }
+          },
+          "file": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9._-]+$",
+            "not": { "pattern": "^(?:\\.|\\.\\.)$" }
+          },
+          "compressed_size": { "type": "integer", "minimum": 1, "maximum": 67108864 },
+          "expanded_size": { "type": "integer", "minimum": 1, "maximum": 268435456 },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "entries": { "type": "integer", "minimum": 1, "maximum": 1000000 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "import_provenance": {
+      "type": "object",
+      "description": "Optional offline conversion provenance; not publisher authentication."
+    }
+  },
+  "additionalProperties": false
+}

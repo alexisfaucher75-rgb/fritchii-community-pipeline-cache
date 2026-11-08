@@ -1,0 +1,18 @@
+# Never track user content or local Vulkan/driver caches.
+*.nsp
+*.nso
+*.nca
+*.ncz
+*.xci
+*.tik
+*.keys
+*.sav
+*.save
+*.dmp
+*.rdc
+user/
+shader/
+driver-cache/
+community-cache/
+*.tmp
+*.bak
